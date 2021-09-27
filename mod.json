@@ -1,0 +1,10 @@
+{
+  "name": "abom-pack",
+  "displayName": "Abominations - TexturePack",
+  "author": "Thristy",
+  "description": "Test",
+  "version": "0.1",
+  "hidden": true,
+  "minGameVersion": "130",
+  "dependencies": []
+}
