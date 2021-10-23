@@ -15,16 +15,7 @@ Events.run(Trigger.update, () => {
     type.region.set(regions[index]);
 });
 
-const types = [UnitTypes.antumbra, UnitTypes.horizon, UnitTypes.flare, UnitTypes.zenith, UnitTypes.eclipse];
-
-Events.run(Trigger.update, () => Groups.unit.each(u => {
-  if(types.includes(u.type)){
-    fx.at(
-      u.x + Angles.trnsx(u.rotation, -u.type.engineOffset),
-      u.y + Angles.trnsy(u.rotation, -u.type.engineOffset)
-    );
-  };
-}));
+const types = [UnitTypes.nova, UnitTypes.vela, UnitTypes.quasar, UnitTypes.pulsar, UnitTypes.antumbra, UnitTypes.horizon, UnitTypes.flare, UnitTypes.zenith, UnitTypes.eclipse];
 
 const fx = new Effect(20, e => Angles.randLenVectors(e.id, 4, e.finpow() * 4, extend(Floatc2, {get(x, y){
     Draw.z(Layer.blockOver);
@@ -33,10 +24,10 @@ const fx = new Effect(20, e => Angles.randLenVectors(e.id, 4, e.finpow() * 4, ex
 }})));
 
 Events.run(Trigger.update, () => Groups.unit.each(u => {
-    if(u.type == type && !Vars.state.isPaused()){
-        fx.at(
-            u.x + Angles.trnsx(u.rotation, -u.type.engineOffset),
-            u.y + Angles.trnsy(u.rotation, -u.type.engineOffset)
-        );
-    }
+  if(u.isFlying() && types.includes(u.type)){
+    fx.at(
+      u.x + Angles.trnsx(u.rotation, -u.type.engineOffset),
+      u.y + Angles.trnsy(u.rotation, -u.type.engineOffset)
+    );
+  };
 }));
